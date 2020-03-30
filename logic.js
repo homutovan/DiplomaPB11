@@ -33,6 +33,7 @@ class Game {
   click (row, col) {
     this.mapBoard(row, col)
     if (this.winAnalizer()) {
+      renderAll();
       return;
     }
     this.nextTurn();
