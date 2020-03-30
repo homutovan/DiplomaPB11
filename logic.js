@@ -31,9 +31,10 @@ class Game {
   }
 
   click (row, col) {
-
     this.mapBoard(row, col)
-    this.winAnalizer();
+    if (this.winAnalizer()) {
+      return;
+    }
     this.nextTurn();
     renderAll();
     if (this.activePlayer == '2' && this.activeEnemy) {
@@ -91,10 +92,12 @@ class Game {
     for (let combo in this.userCombo) {
       if (this.userCombo[combo].length == this.boardSize) {
         showResult(1);
+        return true;
       }
     }
     if (this.turnCounter == this.boardSize ** 2 - 1) {
       showResult(0);
+      return true;
     }
   }
 
@@ -134,7 +137,6 @@ class Game {
 
     if (combo == 'rd') {
       for (let i = 0; i < this.boardSize; i ++) {
-        console.log(i)
         if (!this.board[i][this.boardSize - i - 1]) {
           this.click(i, this.boardSize - i - 1);
           return true;
