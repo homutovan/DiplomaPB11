@@ -33,7 +33,6 @@ class Game {
   click (row, col) {
     this.mapBoard(row, col)
     if (this.winAnalizer()) {
-      renderAll();
       return;
     }
     this.nextTurn();
@@ -92,11 +91,13 @@ class Game {
   winAnalizer() {
     for (let combo in this.userCombo) {
       if (this.userCombo[combo].length == this.boardSize) {
+        renderAll();
         showResult(1);
         return true;
       }
     }
     if (this.turnCounter == this.boardSize ** 2 - 1) {
+      renderAll();
       showResult(0);
       return true;
     }
